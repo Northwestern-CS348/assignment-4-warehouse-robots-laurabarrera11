@@ -37,6 +37,12 @@
       :effect (and (started ?s) (packing-at ?s ?l) (not (unstarted ?s)) (not (available ?l)))
    )
 
+	 (:action startShipment
+      :parameters (?s - shipment ?o - order ?l - location)
+      :precondition (and (unstarted ?s) (not (complete ?s)) (ships ?s ?o) (available ?l) (packing-location ?l))
+      :effect (and (started ?s) (packing-at ?s ?l) (not (unstarted ?s)) (not (available ?l)))
+   )
+
    (:action robotMove
         :parameters (?l1 - location ?l2 - location ?r - robot)
         :precondition (and (no-robot ?l2) (connected ?l1 ?l2) (at ?r ?l1))
